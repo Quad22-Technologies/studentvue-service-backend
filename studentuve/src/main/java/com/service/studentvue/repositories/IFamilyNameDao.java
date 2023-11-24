@@ -1,4 +1,4 @@
-package com.service.studentvue.dao;
+package com.service.studentvue.repositories;
 
 import java.util.List;
 

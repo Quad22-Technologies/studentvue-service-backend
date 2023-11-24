@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.service.studentvue.dao.FamilyNameDao;
 import com.service.studentvue.models.FamilyNameModel;
+import com.service.studentvue.repositories.FamilyNameDao;
 
 import jakarta.annotation.Resource;
 

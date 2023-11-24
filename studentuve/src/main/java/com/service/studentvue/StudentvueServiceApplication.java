@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.service.studentvue.controllers.FamilyNameController;
 import com.service.studentvue.controllers.GradeLevelController;
 import com.service.studentvue.controllers.RegistrationController;
-import com.service.studentvue.dao.FamilyNameDao;
+import com.service.studentvue.repositories.FamilyNameDao;
 import com.service.studentvue.services.FamilyNameService;
 
 @SpringBootApplication
