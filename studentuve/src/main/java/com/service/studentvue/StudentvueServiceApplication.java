@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.service.studentvue.controllers.FamilyNameController;
+import com.service.studentvue.controllers.GradeLevelController;
+import com.service.studentvue.controllers.RegistrationController;
 import com.service.studentvue.dao.FamilyNameDao;
 import com.service.studentvue.services.FamilyNameService;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses={FamilyNameController.class, FamilyNameDao.class, FamilyNameService.class})
+@ComponentScan(basePackageClasses={FamilyNameController.class, FamilyNameDao.class, FamilyNameService.class, GradeLevelController.class, RegistrationController.class })
 public class StudentvueServiceApplication {
 
 	public static void main(String[] args) {
