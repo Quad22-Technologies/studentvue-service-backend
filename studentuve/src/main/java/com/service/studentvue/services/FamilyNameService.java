@@ -34,8 +34,14 @@ public class FamilyNameService implements IFamilyNameService{
 
 	@Override
 	public void updateFamilyName(FamilyNameModel fname) {
-		// TODO Auto-generated method stub
+		_familyNameDao.updateFamilyName(fname);
 		
+	}
+	
+	@Override
+	public FamilyNameModel findById(String id) {
+		// TODO Auto-generated method stub
+		return _familyNameDao.findById(id);
 	}
 
 	@Override
@@ -49,5 +55,7 @@ public class FamilyNameService implements IFamilyNameService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

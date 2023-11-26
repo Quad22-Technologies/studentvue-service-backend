@@ -12,6 +12,8 @@ public interface IFamilyNameService {
 
 	void updateFamilyName(FamilyNameModel fname);
 
+	FamilyNameModel findById(String id);
+	
 	void executeUpdateFamilyName(FamilyNameModel fname);
 
 	public void deleteFamilyName(FamilyNameModel fname);

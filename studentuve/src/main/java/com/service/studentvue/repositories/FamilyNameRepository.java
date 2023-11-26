@@ -52,6 +52,11 @@ public class FamilyNameRepository implements IFamilyNameRepository {
 	 
 	}
 	
+	public FamilyNameModel findById(String id) {
+	    final String sql = "select * from tb_familynames where Id = '" + id + "'";
+	    var foundrecord  = template.query(sql, new FamilyNameRowMapper()); //(FamilyNameModel) is a cast to turn the data coming from the database to match the FamilyNameModel
+	    return (FamilyNameModel)foundrecord.get(0); 
+	}
 	
 	@Override
 	public void deleteFamilyName(FamilyNameModel fname) {
@@ -64,5 +69,7 @@ public class FamilyNameRepository implements IFamilyNameRepository {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }

@@ -11,6 +11,8 @@ public interface IFamilyNameRepository {
 	void insertFamilyName(FamilyNameModel fname);
 
 	void updateFamilyName(FamilyNameModel fname);
+	
+	FamilyNameModel findById(String id);
 
 	void executeUpdateFamilyName(FamilyNameModel fname);
 
