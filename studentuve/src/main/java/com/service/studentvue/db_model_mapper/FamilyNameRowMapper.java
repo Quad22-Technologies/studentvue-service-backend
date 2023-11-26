@@ -12,7 +12,7 @@ public class FamilyNameRowMapper implements RowMapper<FamilyNameModel> {
 	@Override
 	public FamilyNameModel mapRow(ResultSet rs, int arg1) throws SQLException {
 		FamilyNameModel fm = new FamilyNameModel();
-		fm.setId(Integer.parseInt(rs.getString("id")));
+		fm.setId(rs.getObject("id", java.util.UUID.class).toString()); 
 		fm.setFirstname(rs.getString("firstname"));
 		fm.setLastname(rs.getString("lastname"));
 		 

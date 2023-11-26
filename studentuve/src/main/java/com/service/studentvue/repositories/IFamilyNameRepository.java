@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.service.studentvue.models.FamilyNameModel;
 
-public interface IFamilyNameDao {
+public interface IFamilyNameRepository {
 
 	List<FamilyNameModel> findAll();
 

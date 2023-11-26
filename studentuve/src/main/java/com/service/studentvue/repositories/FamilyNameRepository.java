@@ -1,6 +1,8 @@
 package com.service.studentvue.repositories;
 
 import java.util.List;
+import java.util.UUID;
+
 import com.service.studentvue.db_model_mapper.FamilyNameRowMapper;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,12 +14,12 @@ import org.springframework.stereotype.Repository;
 import com.service.studentvue.models.FamilyNameModel;
 
 @Repository
-public class FamilyNameDao implements IFamilyNameDao {
+public class FamilyNameRepository implements IFamilyNameRepository {
 	
-	public FamilyNameDao(NamedParameterJdbcTemplate template) {  
+	public FamilyNameRepository(NamedParameterJdbcTemplate template) {  
         this.template = template;  
 }  
-	NamedParameterJdbcTemplate template;  
+	NamedParameterJdbcTemplate template;  //allows you to use names as paramater values to be inserted vs ? see :firstname,  :lastname these represents the param.
 
 	@Override
 	public List<FamilyNameModel> findAll() {
@@ -26,14 +28,14 @@ public class FamilyNameDao implements IFamilyNameDao {
 
 	@Override
 	public void insertFamilyName(FamilyNameModel fname) {
-		 final String sql = "insert into tb_familynames(firstname, lastname) values(:firstname,:lastname)";
-		 
-	        GeneratedKeyHolder holder = new GeneratedKeyHolder();
+		 final String sql = "insert into tb_familynames(id, firstname, lastname) values(:Id, :firstname,:lastname)";
+		      
+	        		
 	        SqlParameterSource param = new MapSqlParameterSource()
-	        		.addValue("Id", fname.getId())
+	        		.addValue("Id", UUID.fromString(fname.getId())) //UUID.fromString(fname.getId()); the fromstring converts the String ID to UUID type for the database
 					.addValue("firstname", fname.getFirstname())
 					.addValue("lastname", fname.getLastname());
-	        template.update(sql,param, holder);
+	        template.update(sql,param);
 	 
 	}
 	
@@ -41,13 +43,12 @@ public class FamilyNameDao implements IFamilyNameDao {
 	public void updateFamilyName(FamilyNameModel fname) {
 		 final String sql = "update tb_familynames set firstname=:firstname, lastname=:lastname where Id=:Id";
 		 
-	        GeneratedKeyHolder holder = new GeneratedKeyHolder();
 	        SqlParameterSource param = new MapSqlParameterSource()
-					.addValue("Id", fname.getId())
+					.addValue("Id", UUID.fromString(fname.getId()))
 					.addValue("firstname", fname.getFirstname())
 					.addValue("lastname", fname.getLastname());
 					
-	        template.update(sql,param, holder);
+	        template.update(sql,param);
 	 
 	}
 	
