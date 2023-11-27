@@ -13,19 +13,17 @@ import org.springframework.stereotype.Repository;
 import com.service.studentvue.models.FamilyNameModel;
 
 @Repository
-public class FamilyNameRepository implements IFamilyNameRepository {
+public class FamilyNameRepository {
 	
 	public FamilyNameRepository(NamedParameterJdbcTemplate template) {  
         this.template = template;  
 }  
 	NamedParameterJdbcTemplate template;  //allows you to use names as paramater values to be inserted vs ? see :firstname,  :lastname these represents the param.
 
-	@Override
 	public List<FamilyNameModel> findAll() {
 		return template.query("select * from tb_familynames", new FamilyNameRowMapper());
 	}
 
-	@Override
 	public void insertFamilyName(FamilyNameModel fname) {
 		 final String sql = "insert into tb_familynames(id, firstname, lastname) values(:Id, :firstname,:lastname)";
 		      
@@ -38,7 +36,6 @@ public class FamilyNameRepository implements IFamilyNameRepository {
 	 
 	}
 	
-	@Override
 	public void updateFamilyName(FamilyNameModel fname) {
 		 final String sql = "update tb_familynames set firstname=:firstname, lastname=:lastname where Id=:Id";
 		 
@@ -57,13 +54,11 @@ public class FamilyNameRepository implements IFamilyNameRepository {
 	    return (FamilyNameModel)foundrecord.get(0); 
 	}
 	
-	@Override
 	public void deleteFamilyName(FamilyNameModel fname) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void executeUpdateFamilyName(FamilyNameModel fname) {
 		// TODO Auto-generated method stub
 		
