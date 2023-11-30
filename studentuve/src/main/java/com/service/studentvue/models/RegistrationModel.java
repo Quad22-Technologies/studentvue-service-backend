@@ -1,10 +1,13 @@
 package com.service.studentvue.models;
+import java.util.UUID;
+
+import jakarta.annotation.*;
 
 //A model object is a Java object that represents, or models, an item in the application. in this case we are modeling Family Names
 // Models are DTOs - Data transfer Objects
 public class RegistrationModel {// variables/attributes are set as private to make sure that "sensitive" data is hidden from users.
     // this is called Encapsulation
-    private Integer id;
+    private String id;
     private String firstName;
     private String lastName;
     private String address;
@@ -19,7 +22,7 @@ public class RegistrationModel {// variables/attributes are set as private to ma
     //A constructor in Java is a special method that is used to initialize objects.
     // The constructor is called when an object of a class is created. It can be used to set initial values for object attributes
     //In this case we are initializing the Registration object
-    public RegistrationModel(Integer id, String firstName, String lastName, String address, String city, String state, String zipCode, String username, String password, String password2, Integer gradelist) {
+    public RegistrationModel(String id, String firstName, String lastName, String address, String city, String state, String zipCode, String username, String password, String password2, Integer gradelist) {
         this.id = id; // Set the initial value for the class attribute id
         this.firstName = firstName; // Set the initial value for the class attribute firstname
         this.lastName = lastName;// Set the initial value for the class attribute lastname
@@ -33,13 +36,16 @@ public class RegistrationModel {// variables/attributes are set as private to ma
         this.gradelist = gradelist; //Set the initial value for the class attribute gradelist
     }
 
+    public RegistrationModel() {
+    }
+
     //Getters and Setters - The get method returns the variable value, and the set method sets the value.
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String uuid) {
+        this.id = uuid;
     }
 
     public String getFirstName() {
