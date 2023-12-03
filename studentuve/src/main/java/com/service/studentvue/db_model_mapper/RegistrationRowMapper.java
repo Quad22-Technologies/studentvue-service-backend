@@ -15,6 +15,15 @@ public class RegistrationRowMapper implements RowMapper<RegistrationModel> {
 		rm.setId(rs.getObject("id", java.util.UUID.class).toString()); 
 		rm.setFirstName(rs.getString("firstname"));
 		rm.setLastName(rs.getString("lastname"));
+		rm.setAddress(rs.getString("address"));
+		rm.setCity(rs.getString("city"));
+		rm.setState(rs.getString("states"));
+		rm.setZipCode(rs.getString("zipcode"));
+		rm.setUsername(rs.getString("username"));
+		rm.setPassword(rs.getString("userpass"));
+		rm.setPassword2(rs.getString("userpass2"));
+		rm.setGradelist(rs.getInt("usergrade"));
+
 		 
         return rm;
 	}

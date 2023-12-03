@@ -1,8 +1,9 @@
 package com.service.studentvue.models;
 
+/* 
 import java.util.UUID;
-
 import jakarta.annotation.*;
+*/
 
 //A model object is a Java object that represents, or models, an item in the application. in this case we are modeling Family Names
 //Models are DTOs - Data transfer Objects

@@ -1,7 +1,7 @@
 package com.service.studentvue.services;
 
 import java.util.List;
-import java.util.UUID;
+//import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import com.service.studentvue.repositories.RegistrationRepository;
 import jakarta.annotation.Resource;
 
 @Service
-public class RegistrationService implements IFamilyNameService{
+public class RegistrationService implements IRegistrationService{
 
 	@Resource 
 	RegistrationRepository _regDao;
@@ -20,42 +20,37 @@ public class RegistrationService implements IFamilyNameService{
 	public List<RegistrationModel> findAll() {
 		return _regDao.findAll();
 	}
-
+	/*
 	@Override
-	public void insertFamilyName(FamilyNameModel fname) {
-		/*setting UUID for inserting a new record this is because we have changed 
-		our database to use UUID's or GUID's instead of Auto incremented numbers for Primary Keys
-		example: 018b2f19-e79e-7d6a-a56d-29feb6211b04  */
+	public void insertFamilyName(RegistrationModel fname) {
 		UUID uuid = UUID.randomUUID();
 		fname.setId(uuid.toString());
-		_familyNameDao.insertFamilyName(fname);
+		_regDao.insertFamilyName(fname);
 		
 	}
 
 	@Override
-	public void updateFamilyName(FamilyNameModel fname) {
-		_familyNameDao.updateFamilyName(fname);
+	public void updateFamilyName(RegistrationModel fname) {
+		_regDao.updateFamilyName(fname);
 		
 	}
 	
 	@Override
-	public FamilyNameModel findById(String id) {
+	public RegistrationModel findById(String id) {
 		// TODO Auto-generated method stub
-		return _familyNameDao.findById(id);
+		return _regDao.findById(id);
 	}
 
 	@Override
-	public void executeUpdateFamilyName(FamilyNameModel fname) {
+	public void executeUpdateFamilyName(RegistrationModel fname) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteFamilyName(FamilyNameModel fname) {
+	public void deleteFamilyName(RegistrationModel fname) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
+	*/
 }

@@ -1,14 +1,16 @@
 package com.service.studentvue.repositories;
 
 import java.util.List;
-import java.util.UUID;
 
-import com.service.studentvue.db_model_mapper.FamilyNameRowMapper;
-
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import com.service.studentvue.db_model_mapper.RegistrationRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+
+/* 
+import java.util.UUID;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+*/
 
 import com.service.studentvue.models.RegistrationModel;
 
@@ -24,7 +26,7 @@ public class RegistrationRepository implements IRegistrationRepository {
 	public List<RegistrationModel> findAll() {
 		return template.query("select * from tb_reginfo", new RegistrationRowMapper());
 	}
-
+/* 
 	@Override
 	public void insertRegUser(RegistrationModel fname) {
 		 final String sql = "insert into tb_reginfo(id, firstname, lastname) values(:Id, :firstname,:lastname)";
@@ -57,7 +59,7 @@ public class RegistrationRepository implements IRegistrationRepository {
 	    return (RegistrationModel)foundrecord.get(0); 
 	}
 	
-    /* 
+
 	@Override
 	public void deleteFirstName(RegistrationModel fname) {
 		// TODO Auto-generated method stub
@@ -69,8 +71,8 @@ public class RegistrationRepository implements IRegistrationRepository {
 		// TODO Auto-generated method stub
 		
 	}
-    */
-
+    
+*/
 	
 
 }
