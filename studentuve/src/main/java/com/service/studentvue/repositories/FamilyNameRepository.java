@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import com.service.studentvue.db_model_mapper.FamilyNameRowMapper;
 
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -24,15 +25,21 @@ public class FamilyNameRepository {
 		return template.query("select * from tb_familynames", new FamilyNameRowMapper());
 	}
 
-	public void insertFamilyName(FamilyNameModel fname) {
+	public FamilyNameModel insertFamilyName(FamilyNameModel fname) {
 		 final String sql = "insert into tb_familynames(id, firstname, lastname) values(:Id, :firstname,:lastname)";
 		      
 	        		
 	        SqlParameterSource param = new MapSqlParameterSource()
-	        		.addValue("Id", UUID.fromString(fname.getId())) //UUID.fromString(fname.getId()); the fromstring converts the String ID to UUID type for the database
+	        	.addValue("Id", fname.getId()) //UUID.fromString(fname.getId()); the fromstring converts the String ID to UUID type for the database
 					.addValue("firstname", fname.getFirstname())
 					.addValue("lastname", fname.getLastname());
 	        template.update(sql,param);
+	        
+	        //get the newly inserted row
+	        
+	        final String psql = "INSERT dbo.table(column) SELECT 1; SELECT SCOPE_IDENTITY();";
+		    var foundrecord  = template.query(psql, new FamilyNameRowMapper()); //(FamilyNameModel) is a cast to turn the data coming from the database to match the FamilyNameModel
+		    return (FamilyNameModel)foundrecord.get(0); 
 	 
 	}
 	
@@ -45,13 +52,19 @@ public class FamilyNameRepository {
 					.addValue("lastname", fname.getLastname());
 					
 	        template.update(sql,param);
-	 
+	   
 	}
 	
 	public FamilyNameModel findById(String id) {
-	    final String sql = "select * from tb_familynames where Id = '" + id + "'";
-	    var foundrecord  = template.query(sql, new FamilyNameRowMapper()); //(FamilyNameModel) is a cast to turn the data coming from the database to match the FamilyNameModel
-	    return (FamilyNameModel)foundrecord.get(0); 
+	    final String sql = "select * from tb_familynames where Id=:Id";
+		SqlParameterSource param = new MapSqlParameterSource()
+				.addValue("Id", UUID.fromString(id));
+
+		//queryForObject returns one object in this case the family name object
+	    var foundrecord  = template.queryForObject(sql, 
+													param,
+													new FamilyNameRowMapper()); 
+	    return (FamilyNameModel)foundrecord; 
 	}
 	
 	public void deleteFamilyName(FamilyNameModel fname) {

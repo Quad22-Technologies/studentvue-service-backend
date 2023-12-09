@@ -1,8 +1,13 @@
 package com.service.studentvue;
 
+import java.util.Arrays;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.service.studentvue.controllers.FamilyNameController;
 import com.service.studentvue.controllers.GradeLevelController;
@@ -18,4 +23,19 @@ public class StudentvueServiceApplication {
 		SpringApplication.run(StudentvueServiceApplication.class, args);
 
 	}
+	
+	@Bean
+	public UrlBasedCorsConfigurationSource corsFilter() {
+	
+	    CorsConfiguration corsConfiguration = new CorsConfiguration();
+	    corsConfiguration.setAllowCredentials(true);
+	    corsConfiguration.setAllowedOrigins(Arrays.asList("*"));
+	    corsConfiguration.setAllowedMethods(Arrays.asList("*"));
+	    corsConfiguration.setAllowedHeaders(Arrays.asList("*"));
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", corsConfiguration);
+	    return source;
+	}
+
+	
 }

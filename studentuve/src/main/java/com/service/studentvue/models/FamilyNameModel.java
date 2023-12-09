@@ -1,14 +1,10 @@
 package com.service.studentvue.models;
 
-import java.util.UUID;
-
-import jakarta.annotation.*;
-
 //A model object is a Java object that represents, or models, an item in the application. in this case we are modeling Family Names
 //Models are DTOs - Data transfer Objects
 public class FamilyNameModel {// variables/attributes ar set as private to make sure that "sensitive" data is hidden from users.
  // this is called Encapsulation
- 
+
  private String id;
  private String firstname;
  private String lastname;

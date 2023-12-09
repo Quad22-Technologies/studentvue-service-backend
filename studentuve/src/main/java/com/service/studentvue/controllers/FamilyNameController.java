@@ -3,11 +3,10 @@ package com.service.studentvue.controllers;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.Spring;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,15 +36,16 @@ public class FamilyNameController {
         );
     }
     
+    ///Request to 
     @RequestMapping(value="/findallnames", method= RequestMethod.GET) //RequestMapping annotation is used to map web requests onto specific handler classes and/or handler methods.
     public List<FamilyNameModel> getFamilyNames() {
 		return _familyNameService.findAll();
 	
 	}
-	
-    @RequestMapping(value = "/createfamilyname", method= RequestMethod.POST)
-	public void createFamilyName(@RequestBody FamilyNameModel fname) {
-    	_familyNameService.insertFamilyName(fname);
+    
+   @PostMapping("/add")
+	public FamilyNameModel createFamilyName(@RequestBody FamilyNameModel fname) {
+    	return _familyNameService.insertFamilyName(fname);
 	
 	}
     @RequestMapping(value = "/updatefamilyname", method= RequestMethod.PUT)

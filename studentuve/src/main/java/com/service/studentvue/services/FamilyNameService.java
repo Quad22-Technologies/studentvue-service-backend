@@ -14,30 +14,29 @@ import jakarta.annotation.Resource;
 public class FamilyNameService {
 
 	@Resource 
-	FamilyNameRepository _familyNameDao;
+	FamilyNameRepository _familyNameRepository;
 		
 	public List<FamilyNameModel> findAll() {
-		return _familyNameDao.findAll();
+		return _familyNameRepository.findAll();
 	}
 
-	public void insertFamilyName(FamilyNameModel fname) {
+	public FamilyNameModel insertFamilyName(FamilyNameModel fname) {
 		/*setting UUID for inserting a new record this is because we have changed 
 		our database to use UUID's or GUID's instead of Auto incremented numbers for Primary Keys
 		example: 018b2f19-e79e-7d6a-a56d-29feb6211b04  */
 		UUID uuid = UUID.randomUUID();
 		fname.setId(uuid.toString());
-		_familyNameDao.insertFamilyName(fname);
+		return _familyNameRepository.insertFamilyName(fname);
 		
 	}
 
 	public void updateFamilyName(FamilyNameModel fname) {
-		_familyNameDao.updateFamilyName(fname);
+		_familyNameRepository.updateFamilyName(fname);
 		
 	}
 	
 	public FamilyNameModel findById(String id) {
-		// TODO Auto-generated method stub
-		return _familyNameDao.findById(id);
+		return _familyNameRepository.findById(id);
 	}
 
 	public void executeUpdateFamilyName(FamilyNameModel fname) {
