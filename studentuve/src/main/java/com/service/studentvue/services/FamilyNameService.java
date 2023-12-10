@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.service.studentvue.models.AgeModel;
 import com.service.studentvue.models.FamilyNameModel;
 import com.service.studentvue.repositories.FamilyNameRepository;
 
@@ -40,14 +41,23 @@ public class FamilyNameService {
 	}
 
 	public FamilyNameModel findAgeById(String id) {
-		FamilyNameModel fNameModel = _familyNameRepository.findAgeById(id);
+		FamilyNameModel fNameModel = _familyNameRepository.findById(id); //1. get the family name 1st
+
+        if(fNameModel != null) //check to see if the object that's returned from the database is not null;
+		{
+           AgeModel ageM = _familyNameRepository.findAgeById(id); //2. get the age 2nd. query the db for family member age
+		 
+		   if(ageM != null)
+		   {
+			  fNameModel.setFamilyAgeModel(ageM);
+		   }
+
+		}
+
+
 		return fNameModel;
 	}
 
-	public List<FamilyNameModel> findAllNameAge() {
-		var fNameModel = _familyNameRepository.findAllNameAge();
-		return fNameModel;
-	}
 		
 
 }

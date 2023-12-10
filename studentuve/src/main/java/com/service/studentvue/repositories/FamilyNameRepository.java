@@ -1,12 +1,15 @@
 package com.service.studentvue.repositories;
 import java.util.List;
 import java.util.UUID;
+
+import com.service.studentvue.db_model_mapper.AgeRowMapper;
 import com.service.studentvue.db_model_mapper.FamilyNameRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import com.service.studentvue.models.AgeModel;
 import com.service.studentvue.models.FamilyNameModel;
 
 @Repository
@@ -64,9 +67,8 @@ public class FamilyNameRepository {
 	    return (FamilyNameModel)foundrecord; 
 	}
 	
-	public FamilyNameModel findAgeById(String id) {
-	    final String sql = "Select fn.Id, fn.firstname, fn.lastname, age.Id As AgeId, age.age As Age, age.familyname_Id " +
-		                   "from tb_familynames fn, tb_age age Where fn.Id = age.familyname_Id AND  fn.Id=:Id";
+	public AgeModel findAgeById(String id) {
+	    final String sql = "Select * from tb_age Where familyname_Id=:Id";
 		
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("Id", UUID.fromString(id));
@@ -74,12 +76,8 @@ public class FamilyNameRepository {
 		//queryForObject returns one object in this case the family name object
 	    var foundrecord  = template.queryForObject(sql, 
 													param,
-													new FamilyNameRowMapper()); 
-	    return (FamilyNameModel)foundrecord; 
+													new AgeRowMapper()); 
+	    return (AgeModel)foundrecord; 
 	}	
-
-	public List<FamilyNameModel> findAllNameAge() {
-		return template.query("select fn.*,  age.Id As AgeId, age.age As Age, age.familyname_Id  " +
-		                      "from tb_familynames fn, tb_age age Where fn.Id = age.familyname_Id", new FamilyNameRowMapper());
-	}
+	
 }

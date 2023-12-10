@@ -16,17 +16,7 @@ public class FamilyNameRowMapper implements RowMapper<FamilyNameModel> {
 		fm.setId(rs.getObject("id", java.util.UUID.class).toString()); 
 		fm.setFirstname(rs.getString("firstname"));
 		fm.setLastname(rs.getString("lastname"));
-		 
-		//setting the values for Age Model
-		AgeModel am = new AgeModel();
-		am.setId(rs.getObject("ageId", java.util.UUID.class).toString());
-        am.setAge(rs.getInt("age"));
-		am.setFamilyname_Id(rs.getObject("familyname_Id", java.util.UUID.class).toString());
-
-		//here is where we are adding the new Age Model to the Family Name Model
-		fm.setFamilyAgeModel(am);
-        
-		//
+	
 		return fm;
 	}
 
