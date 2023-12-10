@@ -1,11 +1,7 @@
 package com.service.studentvue.repositories;
-
 import java.util.List;
 import java.util.UUID;
-
 import com.service.studentvue.db_model_mapper.FamilyNameRowMapper;
-
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -30,16 +26,17 @@ public class FamilyNameRepository {
 		      
 	        		
 	        SqlParameterSource param = new MapSqlParameterSource()
-	        	.addValue("Id", fname.getId()) //UUID.fromString(fname.getId()); the fromstring converts the String ID to UUID type for the database
+	        	.addValue("Id", UUID.fromString(fname.getId())) //UUID.fromString(fname.getId()); the fromstring converts the String ID to UUID type for the database
 					.addValue("firstname", fname.getFirstname())
 					.addValue("lastname", fname.getLastname());
 	        template.update(sql,param);
 	        
-	        //get the newly inserted row
-	        
-	        final String psql = "INSERT dbo.table(column) SELECT 1; SELECT SCOPE_IDENTITY();";
-		    var foundrecord  = template.query(psql, new FamilyNameRowMapper()); //(FamilyNameModel) is a cast to turn the data coming from the database to match the FamilyNameModel
-		    return (FamilyNameModel)foundrecord.get(0); 
+			//get the newly inserted record
+			String insertedsql = "SELECT * FROM tb_familynames ORDER BY created_at DESC LIMIT 1";
+
+			 var foundrecord  = template.query(insertedsql, new FamilyNameRowMapper()); 
+	    return (FamilyNameModel)foundrecord.get(0); 
+	     
 	 
 	}
 	
