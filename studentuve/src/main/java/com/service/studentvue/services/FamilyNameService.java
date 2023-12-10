@@ -39,17 +39,15 @@ public class FamilyNameService {
 		return _familyNameRepository.findById(id);
 	}
 
-	public void executeUpdateFamilyName(FamilyNameModel fname) {
-		// TODO Auto-generated method stub
-		
+	public FamilyNameModel findAgeById(String id) {
+		FamilyNameModel fNameModel = _familyNameRepository.findAgeById(id);
+		return fNameModel;
 	}
 
-
-	public void deleteFamilyName(FamilyNameModel fname) {
-		// TODO Auto-generated method stub
-		
+	public List<FamilyNameModel> findAllNameAge() {
+		var fNameModel = _familyNameRepository.findAllNameAge();
+		return fNameModel;
 	}
-
-	
+		
 
 }

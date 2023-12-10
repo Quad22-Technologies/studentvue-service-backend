@@ -67,16 +67,22 @@ public class FamilyNameRepository {
 	    return (FamilyNameModel)foundrecord; 
 	}
 	
-	public void deleteFamilyName(FamilyNameModel fname) {
-		// TODO Auto-generated method stub
+	public FamilyNameModel findAgeById(String id) {
+	    final String sql = "Select fn.Id, fn.firstname, fn.lastname, age.Id As AgeId, age.age As Age, age.familyname_Id " +
+		                   "from tb_familynames fn, tb_age age Where fn.Id = age.familyname_Id AND  fn.Id=:Id";
 		
+		SqlParameterSource param = new MapSqlParameterSource()
+				.addValue("Id", UUID.fromString(id));
+
+		//queryForObject returns one object in this case the family name object
+	    var foundrecord  = template.queryForObject(sql, 
+													param,
+													new FamilyNameRowMapper()); 
+	    return (FamilyNameModel)foundrecord; 
+	}	
+
+	public List<FamilyNameModel> findAllNameAge() {
+		return template.query("select fn.*,  age.Id As AgeId, age.age As Age, age.familyname_Id  " +
+		                      "from tb_familynames fn, tb_age age Where fn.Id = age.familyname_Id", new FamilyNameRowMapper());
 	}
-
-	public void executeUpdateFamilyName(FamilyNameModel fname) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 }
