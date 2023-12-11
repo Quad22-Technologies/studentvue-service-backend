@@ -58,6 +58,29 @@ public class FamilyNameService {
 		return fNameModel;
 	}
 
+	//returns a list of amily names and their age
+	public List<FamilyNameModel> findAllNamesAgeById() {
 		
+		List<FamilyNameModel> fNamelist= _familyNameRepository.findAll(); 
+
+        if(fNamelist != null) //check to see if the object that's returned from the database is not null;
+		{
+			for(int i = 0; i < fNamelist.size(); i++) // iterate through the list and attached the age
+			{
+            
+			AgeModel ageM = _familyNameRepository.findAgeById(fNamelist.get(i).getId()); //2. get the age 2nd. query the db for family member age
+		 
+		   if(ageM != null)
+		   {
+			  fNamelist.get(i).setFamilyAgeModel(ageM);
+		   }
+		  
+		  }
+      
+		}
+
+		return fNamelist;
+	}
+	
 
 }

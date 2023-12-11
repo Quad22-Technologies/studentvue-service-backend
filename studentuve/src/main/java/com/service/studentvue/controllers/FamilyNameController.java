@@ -67,13 +67,13 @@ public class FamilyNameController {
 	
 	}
 
-    /*
+    
     @RequestMapping(value="/findAllage", method= RequestMethod.GET) 
     public List<FamilyNameModel> getAllFamilyAgeName() {
-		var familynameandage = _familyNameService.findAllNameAge();
+		var familynameandage = _familyNameService.findAllNamesAgeById();
         return familynameandage;
 	
 	}
-    */
+    
 
 }

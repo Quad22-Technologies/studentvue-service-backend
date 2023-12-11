@@ -72,12 +72,17 @@ public class FamilyNameRepository {
 		
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("Id", UUID.fromString(id));
-
-		//queryForObject returns one object in this case the family name object
-	    var foundrecord  = template.queryForObject(sql, 
+		try {
+			  var foundrecord  = template.queryForObject(sql, 
 													param,
 													new AgeRowMapper()); 
 	    return (AgeModel)foundrecord; 
+			}
+			catch(Exception e) {
+			
+			}
+		//queryForObject returns one object in this case the family name object
+	  return null;
 	}	
 	
 }
