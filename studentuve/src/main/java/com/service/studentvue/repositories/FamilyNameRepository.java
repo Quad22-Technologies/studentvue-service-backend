@@ -79,7 +79,7 @@ public class FamilyNameRepository {
 		}
 	}
 	
-	public AgeModel findAgeById(String id) {
+	public AgeModel findFamilyNameWithAgeById(String id) {
 		final String sql = "SELECT * FROM tb_age WHERE familyname_Id = :Id";
 		
 		SqlParameterSource param = new MapSqlParameterSource()

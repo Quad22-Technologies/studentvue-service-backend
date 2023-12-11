@@ -2,10 +2,7 @@ package com.service.studentvue.db_model_mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.springframework.jdbc.core.RowMapper;
-
-import com.service.studentvue.models.AgeModel;
 import com.service.studentvue.models.FamilyNameModel;
 
 public class FamilyNameRowMapper implements RowMapper<FamilyNameModel> {

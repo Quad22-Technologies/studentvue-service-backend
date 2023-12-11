@@ -62,7 +62,7 @@ public class FamilyNameController {
     //returns one object because it's only looking for the record who's Id is the parameter
     @RequestMapping(value="/findagebyId/{id}", method= RequestMethod.GET) 
     public FamilyNameModel getFamilyAgeNameById(@PathVariable("id") String id) {
-		FamilyNameModel familynameandage = _familyNameService.findAgeById(id);
+		FamilyNameModel familynameandage = _familyNameService.findFamilyNameWithAgeById(id);
         return familynameandage;
 	
 	}
@@ -70,7 +70,7 @@ public class FamilyNameController {
     
     @RequestMapping(value="/findAllage", method= RequestMethod.GET) 
     public List<FamilyNameModel> getAllFamilyAgeName() {
-		var familynameandage = _familyNameService.findAllNamesAgeById();
+		var familynameandage = _familyNameService.findAllNamesWithAge();
         return familynameandage;
 	
 	}

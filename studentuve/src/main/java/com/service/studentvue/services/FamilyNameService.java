@@ -40,12 +40,12 @@ public class FamilyNameService {
 		return _familyNameRepository.findById(id);
 	}
 
-	public FamilyNameModel findAgeById(String id) {
+	public FamilyNameModel findFamilyNameWithAgeById(String id) {
 		FamilyNameModel fNameModel = _familyNameRepository.findById(id); //1. get the family name 1st
 
         if(fNameModel != null) //check to see if the object that's returned from the database is not null;
 		{
-           AgeModel ageM = _familyNameRepository.findAgeById(id); //2. get the age 2nd. query the db for family member age
+           AgeModel ageM = _familyNameRepository.findFamilyNameWithAgeById(id); //2. get the age 2nd. query the db for family member age
 		 
 		   if(ageM != null)
 		   {
@@ -57,29 +57,27 @@ public class FamilyNameService {
 
 		return fNameModel;
 	}
+/*findAllNamesAge method retrieves a list of FamilyNameModel objects
+ and then, for each family name, fetches the corresponding 
+ AgeModel from the database and attaches it to the FamilyNameModel */
+	public List<FamilyNameModel> findAllNamesWithAge() {
+		List<FamilyNameModel> fNamelist = _familyNameRepository.findAll();
+	
+		if (fNamelist != null) {
+			
+			for (FamilyNameModel familyName : fNamelist) { 
+			// Code to be executed for each FamilyNameModel in the list
+			// familyName represents the current element in the iteration
+			// You can access its properties and perform operations
+			AgeModel ageM = _familyNameRepository.findFamilyNameWithAgeById(familyName.getId());
 
-	//returns a list of amily names and their age
-	public List<FamilyNameModel> findAllNamesAgeById() {
-		
-		List<FamilyNameModel> fNamelist= _familyNameRepository.findAll(); 
-
-        if(fNamelist != null) //check to see if the object that's returned from the database is not null;
-		{
-			for(int i = 0; i < fNamelist.size(); i++) // iterate through the list and attached the age
-			{
-            
-				AgeModel ageM = _familyNameRepository.findAgeById(fNamelist.get(i).getId()); //2. get the age 2nd. query the db for family member age
-		 
-				if(ageM != null)
-				{
-					fNamelist.get(i).setFamilyAgeModel(ageM);
-				}
-		    }
-      
+			if (ageM != null) {
+				familyName.setFamilyAgeModel(ageM);
+			}
+		  }
+				
 		}
-
 		return fNamelist;
 	}
-	
 
 }
