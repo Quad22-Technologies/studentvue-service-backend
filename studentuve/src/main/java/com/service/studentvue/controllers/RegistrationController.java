@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 */
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.service.studentvue.models.RegistrationModel;
 import com.service.studentvue.services.RegistrationService;
@@ -39,6 +36,17 @@ public class RegistrationController {
 		return _regService.findAll();
 	
 	}
+
+    @RequestMapping(value="/findkincade/{id}", method= RequestMethod.GET) //RequestMapping annotation is used to map web requests onto specific handler classes and/or handler methods.
+    public List<RegistrationModel> getKincadeInfo(@PathVariable String id) {
+        return _regService.findKincade();
+    }
+
+    @RequestMapping(value="/findkincadebyid/{id}", method= RequestMethod.GET) //RequestMapping annotation is used to map web requests onto specific handler classes and/or handler methods.
+    public RegistrationModel getKincadeInfoById(@PathVariable("id") String id) {
+        return _regService.findKincadeById(id);
+    }
+
 	/* 
     @RequestMapping(value = "/createfamilyname", method= RequestMethod.POST)
 	public void createFamilyName(@RequestBody RegistrationModel fname) {

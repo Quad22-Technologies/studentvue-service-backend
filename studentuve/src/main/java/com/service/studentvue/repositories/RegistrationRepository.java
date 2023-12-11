@@ -26,6 +26,18 @@ public class RegistrationRepository implements IRegistrationRepository {
 	public List<RegistrationModel> findAll() {
 		return template.query("select * from tb_reginfo", new RegistrationRowMapper());
 	}
+
+	@Override
+	public List<RegistrationModel> findKincade() {
+		return template.query("select * from tb_reginfo where firstname = 'Kincade'", new RegistrationRowMapper());
+	}
+
+	@Override
+	public RegistrationModel findKincadeById(String id) {
+		List<RegistrationModel> results = template.query("select * from tb_reginfo where id = '3d29dbf2-3ddb-4de9-a293-a63ab9c64771'", new RegistrationRowMapper());
+		return (RegistrationModel) results.get(0);
+	}
+
 /* 
 	@Override
 	public void insertRegUser(RegistrationModel fname) {

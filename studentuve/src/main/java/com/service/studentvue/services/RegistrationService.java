@@ -20,6 +20,17 @@ public class RegistrationService implements IRegistrationService{
 	public List<RegistrationModel> findAll() {
 		return _regDao.findAll();
 	}
+
+	@Override
+	public List<RegistrationModel> findKincade() {
+		return _regDao.findKincade();
+	}
+
+	@Override
+	public RegistrationModel findKincadeById(String id) {
+		return _regDao.findKincadeById(id);
+	}
+
 	/*
 	@Override
 	public void insertFamilyName(RegistrationModel fname) {
