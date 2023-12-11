@@ -42,12 +42,15 @@ public class FamilyNameController {
 	
 	}
     
-   @PostMapping("/add")
+   @CrossOrigin(origins = "http://localhost:4200") // Specify the allowed origin(s)
+   @RequestMapping(value = "/add", method= RequestMethod.POST)
 	public FamilyNameModel createFamilyName(@RequestBody FamilyNameModel fname) {
     	return _familyNameService.insertFamilyName(fname);
 	
 	}
-    @RequestMapping(value = "/updatefamilyname", method= RequestMethod.PUT)
+    
+    @CrossOrigin(origins = "http://localhost:4200") // Specify the allowed origin(s)
+    @RequestMapping(value = "/update", method= RequestMethod.PUT)
 	public void updateFamilyName(@RequestBody FamilyNameModel fname) {
     	_familyNameService.updateFamilyName(fname);
 	
@@ -75,5 +78,12 @@ public class FamilyNameController {
 	
 	}
     
+    //returns one object because it's only looking for the record who's Id is the parameter
+    @RequestMapping(value="/delete/{id}", method= RequestMethod.DELETE) 
+    public void deleteFamilyname(@PathVariable("id") String id) {
+		_familyNameService.deleteFamilyNameById(id);
+        	
+	}
+
 
 }

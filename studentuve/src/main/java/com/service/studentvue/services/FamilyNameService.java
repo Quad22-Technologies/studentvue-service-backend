@@ -80,4 +80,8 @@ public class FamilyNameService {
 		return fNamelist;
 	}
 
+	public void deleteFamilyNameById(String id)
+	{
+		_familyNameRepository.deleteFamilyNameById(id);
+	}
 }
