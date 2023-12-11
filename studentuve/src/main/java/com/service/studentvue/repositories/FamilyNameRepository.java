@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import com.service.studentvue.db_model_mapper.AgeRowMapper;
 import com.service.studentvue.db_model_mapper.FamilyNameRowMapper;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -34,12 +36,17 @@ public class FamilyNameRepository {
 					.addValue("lastname", fname.getLastname());
 	        template.update(sql,param);
 	        
-			//get the newly inserted record
-			String insertedsql = "SELECT * FROM tb_familynames ORDER BY created_at DESC LIMIT 1";
+			 final String selectSql = "SELECT * FROM tb_familynames ORDER BY created_at DESC LIMIT 1";
 
-			 var foundrecord  = template.query(insertedsql, new FamilyNameRowMapper()); 
-	    return (FamilyNameModel)foundrecord.get(0); 
-	     
+			try {
+				SqlParameterSource newparam = new MapSqlParameterSource();
+				return template.queryForObject(selectSql, newparam, new FamilyNameRowMapper());
+			
+			} catch (EmptyResultDataAccessException e) {
+				// Handle the case where no records are found
+				return null; // Or throw an exception, log a message, etc.
+			
+			}     
 	 
 	}
 	
@@ -56,33 +63,41 @@ public class FamilyNameRepository {
 	}
 	
 	public FamilyNameModel findById(String id) {
-	    final String sql = "select * from tb_familynames where Id=:Id";
+		final String sql = "SELECT * FROM tb_familynames WHERE Id = :Id";
+		
 		SqlParameterSource param = new MapSqlParameterSource()
-				.addValue("Id", UUID.fromString(id));
-
-		//queryForObject returns one object in this case the family name object
-	    var foundrecord  = template.queryForObject(sql, 
-													param,
-													new FamilyNameRowMapper()); 
-	    return (FamilyNameModel)foundrecord; 
+			.addValue("Id", UUID.fromString(id));
+	
+		// queryForObject returns one object, in this case, the family name object
+		try {
+			return template.queryForObject(sql, param, new FamilyNameRowMapper());
+		
+		} catch (EmptyResultDataAccessException e) {
+			// Handle the case where no records are found
+			return null; // Or throw an exception, log a message, etc.
+		
+		}
 	}
 	
 	public AgeModel findAgeById(String id) {
-	    final String sql = "Select * from tb_age Where familyname_Id=:Id";
+		final String sql = "SELECT * FROM tb_age WHERE familyname_Id = :Id";
 		
 		SqlParameterSource param = new MapSqlParameterSource()
-				.addValue("Id", UUID.fromString(id));
+			.addValue("Id", UUID.fromString(id));
+	
 		try {
-			  var foundrecord  = template.queryForObject(sql, 
-													param,
-													new AgeRowMapper()); 
-	    return (AgeModel)foundrecord; 
-			}
-			catch(Exception e) {
-			
-			}
-		//queryForObject returns one object in this case the family name object
-	  return null;
-	}	
+			return template.queryForObject(sql, param, new AgeRowMapper());
+		} catch (EmptyResultDataAccessException e) {
+			// Log the exception or handle it based on your application's needs
+			// For example, you might want to return a default AgeModel or throw a custom exception
+			e.printStackTrace(); // Log the exception
+		} catch (Exception e) {
+			// Log the exception or handle it based on your application's needs
+			e.printStackTrace(); // Log the exception
+		}
+	
+		return null;
+	}
+	
 	
 }

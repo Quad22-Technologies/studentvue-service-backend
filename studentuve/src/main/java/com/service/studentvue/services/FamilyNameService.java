@@ -68,14 +68,13 @@ public class FamilyNameService {
 			for(int i = 0; i < fNamelist.size(); i++) // iterate through the list and attached the age
 			{
             
-			AgeModel ageM = _familyNameRepository.findAgeById(fNamelist.get(i).getId()); //2. get the age 2nd. query the db for family member age
+				AgeModel ageM = _familyNameRepository.findAgeById(fNamelist.get(i).getId()); //2. get the age 2nd. query the db for family member age
 		 
-		   if(ageM != null)
-		   {
-			  fNamelist.get(i).setFamilyAgeModel(ageM);
-		   }
-		  
-		  }
+				if(ageM != null)
+				{
+					fNamelist.get(i).setFamilyAgeModel(ageM);
+				}
+		    }
       
 		}
 
