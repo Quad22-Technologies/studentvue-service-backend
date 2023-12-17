@@ -47,11 +47,11 @@ public class RegistrationController {
         return _regService.findKincadeById(id);
     }
 
-	/* 
-    @RequestMapping(value = "/createfamilyname", method= RequestMethod.POST)
-	public void createFamilyName(@RequestBody RegistrationModel fname) {
-    	_regService.insertFamilyName(fname);
-	
+
+    @RequestMapping(value = "/createuser", method= RequestMethod.POST)
+	public void createFamilyName(@RequestBody RegistrationModel regdata) {
+        _regService.insertRegData(regdata);
+	/*
 	}
     @RequestMapping(value = "/updatefamilyname", method= RequestMethod.PUT)
 	public void updateFamilyName(@RequestBody RegistrationModel fname) {
@@ -65,5 +65,8 @@ public class RegistrationController {
 	
 	}
     */
+    }
 
 }
+
+

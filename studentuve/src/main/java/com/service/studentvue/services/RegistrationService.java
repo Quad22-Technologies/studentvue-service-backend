@@ -1,6 +1,7 @@
 package com.service.studentvue.services;
 
 import java.util.List;
+import java.util.UUID;
 //import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -11,36 +12,30 @@ import com.service.studentvue.repositories.RegistrationRepository;
 import jakarta.annotation.Resource;
 
 @Service
-public class RegistrationService implements IRegistrationService{
+public class RegistrationService{
 
 	@Resource 
 	RegistrationRepository _regDao;
-		
-	@Override
+
 	public List<RegistrationModel> findAll() {
 		return _regDao.findAll();
 	}
 
-	@Override
 	public List<RegistrationModel> findKincade() {
 		return _regDao.findKincade();
 	}
 
-	@Override
 	public RegistrationModel findKincadeById(String id) {
 		return _regDao.findKincadeById(id);
 	}
 
-	/*
-	@Override
-	public void insertFamilyName(RegistrationModel fname) {
+	public void insertRegData(RegistrationModel regdata) {
 		UUID uuid = UUID.randomUUID();
-		fname.setId(uuid.toString());
-		_regDao.insertFamilyName(fname);
+		regdata.setId(uuid.toString());
+		_regDao.insertRegData(regdata);
 		
 	}
-
-	@Override
+	/*
 	public void updateFamilyName(RegistrationModel fname) {
 		_regDao.updateFamilyName(fname);
 		
