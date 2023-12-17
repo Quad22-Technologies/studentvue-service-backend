@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 import com.service.studentvue.models.FamilyNameModel;
 
 public class FamilyNameRowMapper implements RowMapper<FamilyNameModel> {
-
 	@Override
 	public FamilyNameModel mapRow(ResultSet rs, int arg1) throws SQLException {
 		FamilyNameModel fm = new FamilyNameModel();
@@ -16,6 +15,4 @@ public class FamilyNameRowMapper implements RowMapper<FamilyNameModel> {
 	
 		return fm;
 	}
-
-
 }
