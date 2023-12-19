@@ -1,1 +1,6 @@
+# java stuff
+target/
 /target/
+
+# editor files
+/.idea/

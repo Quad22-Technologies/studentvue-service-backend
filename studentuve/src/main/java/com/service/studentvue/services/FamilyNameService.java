@@ -3,9 +3,9 @@ package com.service.studentvue.services;
 import java.util.List;
 import java.util.UUID;
 
+import com.service.studentvue.models.AgeModel;
 import org.springframework.stereotype.Service;
 
-import com.service.studentvue.models.AgeModel;
 import com.service.studentvue.models.FamilyNameModel;
 import com.service.studentvue.repositories.FamilyNameRepository;
 
@@ -28,12 +28,10 @@ public class FamilyNameService {
 		UUID uuid = UUID.randomUUID();
 		fname.setId(uuid.toString());
 		return _familyNameRepository.insertFamilyName(fname);
-		
 	}
 
 	public void updateFamilyName(FamilyNameModel fname) {
 		_familyNameRepository.updateFamilyName(fname);
-		
 	}
 	
 	public FamilyNameModel findById(String id) {
@@ -43,29 +41,27 @@ public class FamilyNameService {
 	public FamilyNameModel findFamilyNameWithAgeById(String id) {
 		FamilyNameModel fNameModel = _familyNameRepository.findById(id); //1. get the family name 1st
 
-        if(fNameModel != null) //check to see if the object that's returned from the database is not null;
-		{
+        if(fNameModel != null) { //check to see if the object that's returned from the database is not null
            AgeModel ageM = _familyNameRepository.findFamilyNameWithAgeById(id); //2. get the age 2nd. query the db for family member age
-		 
-		   if(ageM != null)
-		   {
+
+		   if(ageM != null) {
 			  fNameModel.setFamilyAgeModel(ageM);
 		   }
 
 		}
 
-
 		return fNameModel;
 	}
-/*findAllNamesAge method retrieves a list of FamilyNameModel objects
- and then, for each family name, fetches the corresponding 
- AgeModel from the database and attaches it to the FamilyNameModel */
+
+	/*findAllNamesAge method retrieves a list of FamilyNameModel objects
+	 and then, for each family name, fetches the corresponding
+	 AgeModel from the database and attaches it to the FamilyNameModel */
 	public List<FamilyNameModel> findAllNamesWithAge() {
 		List<FamilyNameModel> fNamelist = _familyNameRepository.findAll();
-	
+
 		if (fNamelist != null) {
-			
-			for (FamilyNameModel familyName : fNamelist) { 
+
+			for (FamilyNameModel familyName : fNamelist) {
 			// Code to be executed for each FamilyNameModel in the list
 			// familyName represents the current element in the iteration
 			// You can access its properties and perform operations
@@ -75,13 +71,12 @@ public class FamilyNameService {
 				familyName.setFamilyAgeModel(ageM);
 			}
 		  }
-				
 		}
+
 		return fNamelist;
 	}
 
-	public void deleteFamilyNameById(String id)
-	{
+	public void deleteFamilyNameById(String id) {
 		_familyNameRepository.deleteFamilyNameById(id);
 	}
 }
