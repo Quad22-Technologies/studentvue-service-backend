@@ -20,11 +20,11 @@ public class GradeLevelService {
     public void insertGradeLevel(GradeLevelModel grade) {
         UUID uuid = UUID.randomUUID();  // create random UUID
         grade.setId(uuid.toString());
-        _gradeLevelDao.insertUser(grade);
+        _gradeLevelDao.insertGradeLevel(grade);
     }
 
     public void updateGradeLevel(GradeLevelModel grade) {
-        _gradeLevelDao.updateUser(grade);
+        _gradeLevelDao.updateGradeLevel(grade);
     }
 
     public GradeLevelModel findById(String id) {
