@@ -23,7 +23,7 @@ public class GradeLevelRepository {
         return template.query("SELECT * FROM gradelevels", new GradeLevelRowMapper());
     }
 
-    public void insertUser(GradeLevelModel grade) {
+    public void insertGradeLevel(GradeLevelModel grade) {
         final String sql = """
                            INSERT INTO gradelevels(id, abreviation, name)
                            VALUES (:Id, :abreviation, :name)
@@ -36,7 +36,7 @@ public class GradeLevelRepository {
         template.update(sql, param);
     }
 
-    public void updateUser(GradeLevelModel grade) {
+    public void updateGradeLevel(GradeLevelModel grade) {
         final String sql = """
                            UPDATE gradelevels SET abreviation=:abreviation, name=:name
                            WHERE Id=:Id;
@@ -51,7 +51,6 @@ public class GradeLevelRepository {
     }
 
     public GradeLevelModel findById(String id) {
-        //                                   is that 100% safe? --  vvvvvv
         final String sql = "SELECT * FROM gradelevels WHERE ID= :Id";
 
         SqlParameterSource param = new MapSqlParameterSource()
