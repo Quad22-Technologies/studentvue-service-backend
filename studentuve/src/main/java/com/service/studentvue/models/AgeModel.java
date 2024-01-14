@@ -12,28 +12,28 @@ public class AgeModel {
      this.familyname_Id = familyname_Id; 
      }
 
-     public AgeModel() {
+    public AgeModel() {
 	}
 
 	//Getters and Setters - The get method returns the variable value, and the set method sets the value.
     public String getId() {
         return id;
     }
-     public void setId(String uuid) {
+    public void setId(String uuid) {
         this.id = uuid;
     }
 
     public Integer getAge() {
         return age;
     }
-     public void setAge(Integer age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
     public String getFamilyname_Id() {
         return familyname_Id;
     }
-     public void setFamilyname_Id(String familyname_Id) {
+    public void setFamilyname_Id(String familyname_Id) {
         this.familyname_Id = familyname_Id;
     }
 

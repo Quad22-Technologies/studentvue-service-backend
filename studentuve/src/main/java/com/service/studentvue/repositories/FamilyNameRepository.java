@@ -101,7 +101,7 @@ public class FamilyNameRepository {
 	
 	public void deleteFamilyNameById(String id) {
 		MapSqlParameterSource parameters = new MapSqlParameterSource()
-		.addValue("Id", UUID.fromString(id));
+			.addValue("Id", UUID.fromString(id));
 
 		template.update("DELETE FROM tb_familynames WHERE Id = :Id", parameters);
 	}
