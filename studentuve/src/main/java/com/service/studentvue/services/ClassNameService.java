@@ -33,6 +33,14 @@ public class ClassNameService {
         return _classNameRepository.findById(id);
     }
 
+    public List<ClassNameModel> getAvailableClasses(String id) {
+        return _classNameRepository.getAvailableClasses(id);
+    }
+
+    public List<ClassNameModel> getRegisteredClasses(String id) {
+        return _classNameRepository.getRegisteredClasses(id);
+    }
+
     public void deleteClassNameById(String id)
     {
         _classNameRepository.deleteClassNameById(id);

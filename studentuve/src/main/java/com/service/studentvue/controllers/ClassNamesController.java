@@ -30,11 +30,15 @@ public class ClassNamesController {
     public void updateClassName(@RequestBody ClassNameModel classname) {
         _classNameService.updateClassName(classname);
     }
-    //returns one object because it's only looking for the record who's Id is the parameter
-    @RequestMapping(value="/classes/get/{id}", method= RequestMethod.GET)
-    public ClassNameModel getClassNameById(@PathVariable("id") String id) {
-        return _classNameService.findById(id);
 
+    //returns one object because it's only looking for the record who's Id is the parameter
+    @RequestMapping(value="/classes/available/{uid}", method= RequestMethod.GET)
+    public List<ClassNameModel> getAvailableClasses(@PathVariable("uid") String id) {
+        return _classNameService.getAvailableClasses(id);
+    }
+    @RequestMapping(value="/classes/registered/{uid}", method= RequestMethod.GET)
+    public List<ClassNameModel> getRegisteredClasses(@PathVariable("uid") String id) {
+        return _classNameService.getRegisteredClasses(id);
     }
 
     //returns one object because it's only looking for the record who's Id is the parameter

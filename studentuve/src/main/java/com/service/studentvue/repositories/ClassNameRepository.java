@@ -78,6 +78,47 @@ public class ClassNameRepository {
         return null;
     }
 
+    // get all classes a user has NOT registered for
+    public List<ClassNameModel> getAvailableClasses(String id) {
+        final String sql = "SELECT * FROM classnames WHERE id NOT IN (SELECT classname_id FROM classgrades WHERE student_id= :Id);";
+
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("Id", UUID.fromString(id));
+
+        try {
+            return template.query(sql, param, new ClassNameRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            // Log the exception or handle it based on your application's needs
+            // For example, you might want to return a default AgeModel or throw a custom exception
+            e.printStackTrace(); // Log the exception
+        } catch (Exception e) {
+            // Log the exception or handle it based on your application's needs
+            e.printStackTrace(); // Log the exception
+        }
+
+        return null;
+    }
+
+    public List<ClassNameModel> getRegisteredClasses(String id) {
+        final String sql = "SELECT * FROM classnames WHERE id IN (SELECT classname_id FROM classgrades WHERE student_id= :Id);";
+
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("Id", UUID.fromString(id));
+
+        try {
+            return template.query(sql, param, new ClassNameRowMapper());
+        } catch (EmptyResultDataAccessException e) {
+            // Log the exception or handle it based on your application's needs
+            // For example, you might want to return a default AgeModel or throw a custom exception
+            e.printStackTrace(); // Log the exception
+        } catch (Exception e) {
+            // Log the exception or handle it based on your application's needs
+            e.printStackTrace(); // Log the exception
+        }
+
+        return null;
+    }
+
     public void deleteClassNameById(String id) {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("Id", UUID.fromString(id));
