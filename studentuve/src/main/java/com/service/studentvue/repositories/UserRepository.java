@@ -111,6 +111,38 @@ public class UserRepository {
         }
     }
 
+    public UserModel findByUsername(String username) {
+        final String sql = "SELECT * FROM users WHERE username = :username";
+
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("username", username);
+
+        try {
+            return template.queryForObject(sql, param, new UserRowMapper());
+
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where no records are found
+            return null; // Or throw an exception, log a message, etc.
+
+        }
+    }
+
+    public UserModel findByEmail(String email) {
+        final String sql = "SELECT * FROM users WHERE emailaddress = :emailaddress";
+
+        SqlParameterSource param = new MapSqlParameterSource()
+                .addValue("emailaddress", email);
+
+        try {
+            return template.queryForObject(sql, param, new UserRowMapper());
+
+        } catch (EmptyResultDataAccessException e) {
+            // Handle the case where no records are found
+            return null; // Or throw an exception, log a message, etc.
+
+        }
+    }
+
     public void deleteUserById(String id) {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("Id", UUID.fromString(id));

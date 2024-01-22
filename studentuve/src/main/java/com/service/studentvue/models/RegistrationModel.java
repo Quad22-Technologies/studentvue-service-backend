@@ -11,6 +11,7 @@ public class RegistrationModel {// variables/attributes are set as private to ma
     private String city;
     private String state;
     private String zipCode;
+    private String email;
     private String username;
     private String password;
     private String password2;
@@ -19,7 +20,10 @@ public class RegistrationModel {// variables/attributes are set as private to ma
     //A constructor in Java is a special method that is used to initialize objects.
     // The constructor is called when an object of a class is created. It can be used to set initial values for object attributes
     //In this case we are initializing the Registration object
-    public RegistrationModel(Integer id, String firstName, String lastName, String address, String city, String state, String zipCode, String username, String password, String password2, String gradeLevelId) {
+    public RegistrationModel(Integer id, String firstName, String lastName,
+                             String address, String city, String state, String zipCode,
+                             String email, String username, String password, String password2,
+                             String gradeLevelId) {
         this.id = id; // Set the initial value for the class attribute id
         this.firstName = firstName; // Set the initial value for the class attribute firstname
         this.lastName = lastName;// Set the initial value for the class attribute lastname
@@ -27,6 +31,7 @@ public class RegistrationModel {// variables/attributes are set as private to ma
         this.city = city; //Set the initial value for the class attribute user city
         this.state = state; //Set the initial value for the class attribute user state
         this.zipCode = zipCode; //Set the initial value for the class attribute user zipcode
+        this.email = email;
         this.username = username; //Set the initial value for the class attribute username
         this.password = password; //Set the initial value for the class attribute password
         this.password2 = password2; //Set the initial value for the class attribute password2
@@ -96,6 +101,14 @@ public class RegistrationModel {// variables/attributes are set as private to ma
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
